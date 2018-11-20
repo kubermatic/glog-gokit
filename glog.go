@@ -2,6 +2,7 @@ package glog
 
 import (
 	"fmt"
+	"os"
 	"sync"
 
 	"github.com/go-kit/kit/log"
@@ -23,197 +24,106 @@ type Verbose bool
 
 func V(level Level) Verbose { return true }
 
+func logMsg(l log.Logger, f string, msg string) {
+	l.Log("func", f, "msg", msg)
+}
+
 func (v Verbose) Info(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Verbose.Info")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Debug(logger).Log(pairs...)
+	logMsg(level.Debug(logger), "Verbose.Info", fmt.Sprint(args...))
 }
 
 func (v Verbose) Infoln(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Verbose.Infoln")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Debug(logger).Log(pairs...)
+	logMsg(level.Debug(logger), "Verbose.Infoln", fmt.Sprint(args...))
 }
 
 func (v Verbose) Infof(format string, args ...interface{}) {
-	level.Debug(logger).Log(
-		"func", "Infof",
-		"msg", fmt.Sprintf(format, args...),
-	)
+	logMsg(level.Debug(logger), "Verbose.Infof", fmt.Sprintf(format, args...))
 }
 
 func Info(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Info")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Debug(logger).Log(pairs...)
+	logMsg(level.Debug(logger), "Info", fmt.Sprint(args...))
 }
 
 func InfoDepth(depth int, args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "InfoDepth")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Debug(logger).Log(pairs...)
+	logMsg(level.Debug(logger), "InfoDepth", fmt.Sprint(args...))
 }
 
 func Infoln(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Infoln")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Debug(logger).Log(pairs...)
+	logMsg(level.Debug(logger), "Infoln", fmt.Sprint(args...))
 }
 
 func Infof(format string, args ...interface{}) {
-	level.Debug(logger).Log(
-		"func", "Infof",
-		"msg", fmt.Sprintf(format, args...),
-	)
+	logMsg(level.Debug(logger), "Infof", fmt.Sprintf(format, args...))
 }
 
 func Warning(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Warning")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Warn(logger).Log(pairs...)
+	logMsg(level.Warn(logger), "Warning", fmt.Sprint(args...))
 }
 
 func WarningDepth(depth int, args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "WarningDepth")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Warn(logger).Log(pairs...)
+	logMsg(level.Warn(logger), "WarningDepth", fmt.Sprint(args...))
 }
 
 func Warningln(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Warningln")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Warn(logger).Log(pairs...)
+	logMsg(level.Warn(logger), "Warningln", fmt.Sprint(args...))
 }
 
 func Warningf(format string, args ...interface{}) {
-	level.Warn(logger).Log(
-		"func", "Warningf",
-		"msg", fmt.Sprintf(format, args...),
-	)
+	logMsg(level.Warn(logger), "Warningf", fmt.Sprintf(format, args...))
 }
 
 func Error(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Error")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Error(logger).Log(pairs...)
+	logMsg(level.Error(logger), "Error", fmt.Sprint(args...))
 }
 
 func ErrorDepth(depth int, args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "ErrorDepth")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Error(logger).Log(pairs...)
+	logMsg(level.Error(logger), "ErrorDepth", fmt.Sprint(args...))
 }
 
 func Errorln(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Errorln")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Error(logger).Log(pairs...)
+	logMsg(level.Error(logger), "Errorln", fmt.Sprint(args...))
 }
 
 func Errorf(format string, args ...interface{}) {
-	level.Error(logger).Log(
-		"func", "Errorf",
-		"msg", fmt.Sprintf(format, args...),
-	)
+	logMsg(level.Error(logger), "Errorf", fmt.Sprintf(format, args...))
 }
 
 func Fatal(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Fatal")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Error(logger).Log(pairs...)
+	logMsg(level.Error(logger), "Fatal", fmt.Sprint(args...))
+	os.Exit(255)
 }
 
 func FatalDepth(depth int, args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "FatalDepth")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Error(logger).Log(pairs...)
+	logMsg(level.Error(logger), "FatalDepth", fmt.Sprint(args...))
+	os.Exit(255)
 }
 
 func Fatalln(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Fatalln")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Error(logger).Log(pairs...)
+	logMsg(level.Error(logger), "Fatalln", fmt.Sprint(args...))
+	os.Exit(255)
 }
 
 func Fatalf(format string, args ...interface{}) {
-	level.Error(logger).Log(
-		"func", "Fatalf",
-		"msg", fmt.Sprintf(format, args...),
-	)
+	logMsg(level.Error(logger), "Fatalf", fmt.Sprintf(format, args...))
+	os.Exit(255)
 }
 
 func Exit(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Exit")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Error(logger).Log(pairs...)
+	logMsg(level.Error(logger), "Exit", fmt.Sprint(args...))
+	os.Exit(1)
 }
 
 func ExitDepth(depth int, args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "ExitDepth")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Error(logger).Log(pairs...)
+	logMsg(level.Error(logger), "ExitDepth", fmt.Sprint(args...))
+	os.Exit(1)
 }
 
 func Exitln(args ...interface{}) {
-	var pairs []interface{}
-	pairs = append(pairs, "func", "Exitln")
-	for key, value := range args {
-		pairs = append(pairs, key, value)
-	}
-	level.Error(logger).Log(pairs...)
+	logMsg(level.Error(logger), "ExitDepth", fmt.Sprint(args...))
+	os.Exit(1)
 }
 
 func Exitf(format string, args ...interface{}) {
-	level.Error(logger).Log(
-		"func", "Exitf",
-		"msg", fmt.Sprintf(format, args...),
-	)
+	logMsg(level.Error(logger), "Exit", fmt.Sprintf(format, args...))
+	os.Exit(1)
 }
