@@ -2,6 +2,7 @@ package glog
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"sync"
 
@@ -9,12 +10,23 @@ import (
 	"github.com/go-kit/kit/log/level"
 )
 
+var maxLevel Level = math.MaxInt32
 var logger = log.NewNopLogger()
 var mu = sync.Mutex{}
 
+// SetLogger redirects glog logging to the given logger.
+// It must be called prior any call to glog.
 func SetLogger(l log.Logger) {
 	mu.Lock()
 	logger = l
+	mu.Unlock()
+}
+
+// ClampLevel clamps the leveled logging at the specified value.
+// It must be called prior any call to glog.
+func ClampLevel(l Level) {
+	mu.Lock()
+	maxLevel = l
 	mu.Unlock()
 }
 
@@ -22,22 +34,28 @@ type Level int32
 
 type Verbose bool
 
-func V(level Level) Verbose { return true }
+func V(level Level) Verbose { return level <= maxLevel }
 
 func logMsg(l log.Logger, f string, msg string) {
 	l.Log("func", f, "msg", msg)
 }
 
 func (v Verbose) Info(args ...interface{}) {
-	logMsg(level.Debug(logger), "Verbose.Info", fmt.Sprint(args...))
+	if v {
+		logMsg(level.Debug(logger), "Verbose.Info", fmt.Sprint(args...))
+	}
 }
 
 func (v Verbose) Infoln(args ...interface{}) {
-	logMsg(level.Debug(logger), "Verbose.Infoln", fmt.Sprint(args...))
+	if v {
+		logMsg(level.Debug(logger), "Verbose.Infoln", fmt.Sprint(args...))
+	}
 }
 
 func (v Verbose) Infof(format string, args ...interface{}) {
-	logMsg(level.Debug(logger), "Verbose.Infof", fmt.Sprintf(format, args...))
+	if v {
+		logMsg(level.Debug(logger), "Verbose.Infof", fmt.Sprintf(format, args...))
+	}
 }
 
 func Info(args ...interface{}) {
