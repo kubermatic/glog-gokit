@@ -30,19 +30,19 @@ func TestInfo(t *testing.T) {
 	}{{
 		Name:     "String",
 		Args:     []interface{}{"foo"},
-		Expected: `{"0":"foo", "func":"Info", "level":"debug"}`,
+		Expected: `{"msg":"foo", "func":"Info", "level":"debug"}`,
 	}, {
 		Name:     "Int",
 		Args:     []interface{}{42},
-		Expected: `{"0":42, "func":"Info", "level":"debug"}`,
+		Expected: `{"msg":"42", "func":"Info", "level":"debug"}`,
 	}, {
 		Name:     "Bool",
 		Args:     []interface{}{true},
-		Expected: `{"0":true, "func":"Info", "level":"debug"}`,
+		Expected: `{"msg":"true", "func":"Info", "level":"debug"}`,
 	}, {
 		Name:     "StringInt",
 		Args:     []interface{}{"foo", 42},
-		Expected: `{"0":"foo", "1": 42, "func":"Info", "level":"debug"}`,
+		Expected: `{"msg":"foo42", "func":"Info", "level":"debug"}`,
 	}}
 
 	for _, tc := range testcases {
