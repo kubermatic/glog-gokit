@@ -36,112 +36,108 @@ type Verbose bool
 
 func V(level Level) Verbose { return level <= maxLevel }
 
-func logMsg(l log.Logger, f string, msg string) {
-	l.Log("func", f, "msg", msg)
-}
-
 func (v Verbose) Info(args ...interface{}) {
 	if v {
-		logMsg(level.Debug(logger), "Verbose.Info", fmt.Sprint(args...))
+		level.Debug(logger).Log("func", "Verbose.Info", "msg", fmt.Sprint(args...))
 	}
 }
 
 func (v Verbose) Infoln(args ...interface{}) {
 	if v {
-		logMsg(level.Debug(logger), "Verbose.Infoln", fmt.Sprint(args...))
+		level.Debug(logger).Log("func", "Verbose.Infoln", "msg", fmt.Sprint(args...))
 	}
 }
 
 func (v Verbose) Infof(format string, args ...interface{}) {
 	if v {
-		logMsg(level.Debug(logger), "Verbose.Infof", fmt.Sprintf(format, args...))
+		level.Debug(logger).Log("func", "Verbose.Infof", "msg", fmt.Sprintf(format, args...))
 	}
 }
 
 func Info(args ...interface{}) {
-	logMsg(level.Debug(logger), "Info", fmt.Sprint(args...))
+	level.Debug(logger).Log("func", "Info", "msg", fmt.Sprint(args...))
 }
 
 func InfoDepth(depth int, args ...interface{}) {
-	logMsg(level.Debug(logger), "InfoDepth", fmt.Sprint(args...))
+	level.Debug(logger).Log("func", "InfoDepth", "msg", fmt.Sprint(args...))
 }
 
 func Infoln(args ...interface{}) {
-	logMsg(level.Debug(logger), "Infoln", fmt.Sprint(args...))
+	level.Debug(logger).Log("func", "Infoln", "msg", fmt.Sprint(args...))
 }
 
 func Infof(format string, args ...interface{}) {
-	logMsg(level.Debug(logger), "Infof", fmt.Sprintf(format, args...))
+	level.Debug(logger).Log("func", "Infof", "msg", fmt.Sprintf(format, args...))
 }
 
 func Warning(args ...interface{}) {
-	logMsg(level.Warn(logger), "Warning", fmt.Sprint(args...))
+	level.Warn(logger).Log("func", "Warning", "msg", fmt.Sprint(args...))
 }
 
 func WarningDepth(depth int, args ...interface{}) {
-	logMsg(level.Warn(logger), "WarningDepth", fmt.Sprint(args...))
+	level.Warn(logger).Log("func", "WarningDepth", "msg", fmt.Sprint(args...))
 }
 
 func Warningln(args ...interface{}) {
-	logMsg(level.Warn(logger), "Warningln", fmt.Sprint(args...))
+	level.Warn(logger).Log("func", "Warningln", "msg", fmt.Sprint(args...))
 }
 
 func Warningf(format string, args ...interface{}) {
-	logMsg(level.Warn(logger), "Warningf", fmt.Sprintf(format, args...))
+	level.Warn(logger).Log("func", "Warningf", "msg", fmt.Sprintf(format, args...))
 }
 
 func Error(args ...interface{}) {
-	logMsg(level.Error(logger), "Error", fmt.Sprint(args...))
+	level.Error(logger).Log("func", "Error", "msg", fmt.Sprint(args...))
 }
 
 func ErrorDepth(depth int, args ...interface{}) {
-	logMsg(level.Error(logger), "ErrorDepth", fmt.Sprint(args...))
+	level.Error(logger).Log("func", "ErrorDepth", "msg", fmt.Sprint(args...))
 }
 
 func Errorln(args ...interface{}) {
-	logMsg(level.Error(logger), "Errorln", fmt.Sprint(args...))
+	level.Error(logger).Log("func", "Errorln", "msg", fmt.Sprint(args...))
 }
 
 func Errorf(format string, args ...interface{}) {
-	logMsg(level.Error(logger), "Errorf", fmt.Sprintf(format, args...))
+	level.Error(logger).Log("func", "Errorf", "msg", fmt.Sprintf(format, args...))
 }
 
 func Fatal(args ...interface{}) {
-	logMsg(level.Error(logger), "Fatal", fmt.Sprint(args...))
+	level.Error(logger).Log("func", "Fatal", "msg", fmt.Sprint(args...))
 	os.Exit(255)
 }
 
 func FatalDepth(depth int, args ...interface{}) {
-	logMsg(level.Error(logger), "FatalDepth", fmt.Sprint(args...))
+	level.Error(logger).Log("func", "FatalDepth", "msg", fmt.Sprint(args...))
 	os.Exit(255)
 }
 
 func Fatalln(args ...interface{}) {
-	logMsg(level.Error(logger), "Fatalln", fmt.Sprint(args...))
+	level.Error(logger).Log("func", "Fatalln", "msg", fmt.Sprint(args...))
 	os.Exit(255)
 }
 
 func Fatalf(format string, args ...interface{}) {
-	logMsg(level.Error(logger), "Fatalf", fmt.Sprintf(format, args...))
+	level.Error(logger).Log("func", "Fatalf", "msg", fmt.Sprintf(format, args...))
 	os.Exit(255)
 }
 
 func Exit(args ...interface{}) {
-	logMsg(level.Error(logger), "Exit", fmt.Sprint(args...))
+	level.Error(logger).Log("func", "Exit", "msg", fmt.Sprint(args...))
 	os.Exit(1)
 }
 
 func ExitDepth(depth int, args ...interface{}) {
-	logMsg(level.Error(logger), "ExitDepth", fmt.Sprint(args...))
+	level.Error(logger).Log("func", "ExitDepth", "msg", fmt.Sprint(args...))
 	os.Exit(1)
 }
 
 func Exitln(args ...interface{}) {
-	logMsg(level.Error(logger), "ExitDepth", fmt.Sprint(args...))
+	level.Error(logger).Log("func", "Exitln", "msg", fmt.Sprint(args...))
 	os.Exit(1)
 }
 
 func Exitf(format string, args ...interface{}) {
-	logMsg(level.Error(logger), "Exit", fmt.Sprintf(format, args...))
+	level.Error(logger).Log("func", "Exitf", "msg", fmt.Sprintf(format, args...))
 	os.Exit(1)
 }
