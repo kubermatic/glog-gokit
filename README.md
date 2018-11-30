@@ -11,11 +11,21 @@ https://github.com/istio/glog
 Override the official glog package with this one.
 This simply replaces the code in `vendor/golang/glog` with the code of this package.
 
+**With dep**
+
 In your `Gopkg.toml`:
 ```toml
 [[override]]
   name = "github.com/golang/glog"
   source = "github.com/kubermatic/glog-gokit"
+```
+
+**With Go modules**
+
+Add this line to your `go.mod` file:
+
+```
+replace github.com/golang/glog => github.com/kubermatic/glog-gokit master
 ```
 
 In your `main.go`:
