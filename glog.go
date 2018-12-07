@@ -141,3 +141,5 @@ func Exitf(format string, args ...interface{}) {
 	level.Error(logger).Log("func", "Exitf", "msg", fmt.Sprintf(format, args...))
 	os.Exit(1)
 }
+
+func Flush() {}
